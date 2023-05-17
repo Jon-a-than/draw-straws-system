@@ -1,0 +1,9 @@
+{
+  // 关闭Iconify插件隐藏类名
+  "iconify.inplace": false,
+  "unocss.colorPreview": true,
+  "unocss.underline": true,
+  "unocss.root": [
+    "./frontend"
+  ],
+}
