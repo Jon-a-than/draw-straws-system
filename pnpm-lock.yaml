@@ -49,6 +49,9 @@ importers:
       rxjs:
         specifier: ^7.8.1
         version: registry.npmmirror.com/rxjs@7.8.1
+      uuid:
+        specifier: ^9.0.0
+        version: registry.npmmirror.com/uuid@9.0.0
     devDependencies:
       '@nestjs/cli':
         specifier: ^9.4.2
@@ -71,6 +74,9 @@ importers:
       '@types/supertest':
         specifier: ^2.0.12
         version: registry.npmmirror.com/@types/supertest@2.0.12
+      '@types/uuid':
+        specifier: ^9.0.1
+        version: registry.npmmirror.com/@types/uuid@9.0.1
       '@typescript-eslint/eslint-plugin':
         specifier: ^5.59.6
         version: registry.npmmirror.com/@typescript-eslint/eslint-plugin@5.59.6(@typescript-eslint/parser@5.59.6)(eslint@8.40.0)(typescript@5.0.4)
@@ -119,6 +125,9 @@ importers:
       '@unocss/reset':
         specifier: ^0.51.13
         version: registry.npmmirror.com/@unocss/reset@0.51.13
+      alova:
+        specifier: ^2.5.0
+        version: registry.npmmirror.com/alova@2.5.0
       pinia:
         specifier: ^2.0.36
         version: registry.npmmirror.com/pinia@2.0.36(typescript@5.0.4)(vue@3.3.2)
@@ -2291,6 +2300,12 @@ packages:
     version: 4.0.2
     dev: true
 
+  registry.npmmirror.com/@types/uuid@9.0.1:
+    resolution: {integrity: sha512-rFT3ak0/2trgvp4yYZo5iKFEPsET7vKydKF+VRCxlQ9bpheehyAJH89dAkaLEq/j/RZXJIqcgsmPJKUP1Z28HA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/uuid/-/uuid-9.0.1.tgz}
+    name: '@types/uuid'
+    version: 9.0.1
+    dev: true
+
   registry.npmmirror.com/@types/yargs-parser@21.0.0:
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/yargs-parser/-/yargs-parser-21.0.0.tgz}
     name: '@types/yargs-parser'
@@ -3297,6 +3312,13 @@ packages:
       require-from-string: registry.npmmirror.com/require-from-string@2.0.2
       uri-js: registry.npmmirror.com/uri-js@4.4.1
     dev: true
+
+  registry.npmmirror.com/alova@2.5.0:
+    resolution: {integrity: sha512-/+BqlMhBT1SQzkT+N0zo73LeEw1xaw+OEv6ML53N18kTn7x8GDIga17k/giOxUf1dL1tqi8nf01mNbsi4IkwRA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/alova/-/alova-2.5.0.tgz}
+    name: alova
+    version: 2.5.0
+    engines: {node: '>= 0.12.0'}
+    dev: false
 
   registry.npmmirror.com/ansi-colors@4.1.3:
     resolution: {integrity: sha512-/6w/C21Pm1A7aZitlI5Ni/2J6FFQN8i1Cvz3kHABAAbw93v/NlvKdVOqz7CCWz/3iv/JplRSEEZ83XION15ovw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ansi-colors/-/ansi-colors-4.1.3.tgz}
@@ -10636,6 +10658,13 @@ packages:
     version: 8.3.2
     hasBin: true
     dev: true
+
+  registry.npmmirror.com/uuid@9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/uuid/-/uuid-9.0.0.tgz}
+    name: uuid
+    version: 9.0.0
+    hasBin: true
+    dev: false
 
   registry.npmmirror.com/v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/v8-compile-cache-lib/-/v8-compile-cache-lib-3.0.1.tgz}
