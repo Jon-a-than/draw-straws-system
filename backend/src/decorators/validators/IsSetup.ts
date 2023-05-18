@@ -11,7 +11,7 @@ export function IsSetup(validationOptions?: ValidationOptions): PropertyDecorato
       },
       validator: {
         validate(setups: unknown[]) {
-          return setups.reduce<boolean>((_, setup) => {
+          return !!setups?.reduce<boolean>((_, setup) => {
             const keys = Object.keys(setup)
             return keys.length === 2 && keys.includes('tag') && keys.includes('limit')
           }, true)
