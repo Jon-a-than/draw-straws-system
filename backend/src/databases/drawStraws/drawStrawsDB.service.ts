@@ -3,9 +3,8 @@ import { Model } from 'mongoose'
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { DrawStrawsPool } from '../schemas/drawStraws.schema'
-import { IDrawStrawsPool } from '@/interfaces/drawStraws.interface'
 
-type UUID = `${string}-${string}-${string}-${string}-${string}`
+import type { IDrawStrawsSchema, IUUID } from '@/interfaces/drawStraws.interface'
 
 @Injectable()
 export class DrawStrawsDBService {
@@ -14,13 +13,13 @@ export class DrawStrawsDBService {
   ) {}
 
   async createDrawStrawsPool(
-    drawStrawsPool: Omit<IDrawStrawsPool, '_id'>
-  ): Promise<`${UUID}$${number}`> {
-    const _id = randomUUID()
-    const newDrawStrawsPool = new this.drawStrawsPoolModel({ ...drawStrawsPool, _id })
+    drawStrawsInfo: Omit<IDrawStrawsSchema, '_id' | 'list'>
+  ): Promise<IUUID> {
+    const drawStrawsPool = { list: [], _id: randomUUID(), ...drawStrawsInfo }
+    const newDrawStrawsPool = new this.drawStrawsPoolModel(drawStrawsPool)
     await newDrawStrawsPool.save()
 
-    return `${_id}$${drawStrawsPool.type}`
+    return drawStrawsPool._id
   }
 
   // async findPoolById(id: ): Promise<ListInfoDB | null> {

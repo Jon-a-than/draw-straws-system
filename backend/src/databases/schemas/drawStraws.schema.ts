@@ -1,14 +1,21 @@
 import { HydratedDocument } from 'mongoose'
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 
-import type { DrawStrawsType, IDrawStrawsPool, IPoolSetup } from '@/interfaces/drawStraws.interface'
+import type {
+  DrawStrawsType,
+  IDrawStrawsListItem,
+  IDrawStrawsSchema
+} from '@/interfaces/drawStraws.interface'
 
 export type DrawStrawsPoolDocument = HydratedDocument<DrawStrawsPool>
 
 @Schema()
-export class DrawStrawsPool implements IDrawStrawsPool {
+export class DrawStrawsPool implements IDrawStrawsSchema {
   @Prop({ required: true })
   _id: string
+
+  @Prop({ required: true })
+  title: string
 
   @Prop({ required: true })
   type: DrawStrawsType
@@ -17,7 +24,7 @@ export class DrawStrawsPool implements IDrawStrawsPool {
   total: number
 
   @Prop({ required: true })
-  setup: IPoolSetup[]
+  list: IDrawStrawsListItem[]
 }
 
 const DrawStrawsPoolSchema = SchemaFactory.createForClass(DrawStrawsPool)
