@@ -22,7 +22,19 @@ export class DrawStrawsDBService {
     return drawStrawsPool._id
   }
 
-  // async findPoolById(id: ): Promise<ListInfoDB | null> {
-  //   const document = await this.todoModel.findById(id).lean().exec()
-  // }
+  async findOneById(uuid: string) {
+    const document = (await this.drawStrawsPoolModel
+      .findById(uuid)
+      .lean()
+      .exec()) as IDrawStrawsSchema & { __v: number }
+
+    return document ? filterDocument(document) : null
+  }
+}
+
+function filterDocument<T extends Record<'_id' | '__v', unknown>>(
+  document: T
+): Omit<T, '_id' | '__v'> {
+  const { _id, __v, ...filteredDocument } = document
+  return filteredDocument
 }
