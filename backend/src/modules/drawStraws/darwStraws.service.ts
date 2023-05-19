@@ -6,7 +6,7 @@ import { HttpException, Inject, Injectable } from '@nestjs/common'
 import { DrawStrawsDBService } from '@/databases/drawStraws/drawStrawsDB.service'
 
 import type { IDrawStrawsRedisValue } from './interfaces/drawStrawsRedis.interface'
-import type { DrawStrawsType, ICreateDrawStrawsDto } from '@/interfaces/drawStraws.interface'
+import { DrawStrawsType, ICreateDrawStrawsDto } from '@/interfaces/drawStraws.interface'
 
 @Injectable()
 export class DrawStrawsService {
@@ -15,6 +15,7 @@ export class DrawStrawsService {
     private readonly drawStrawsDBService: DrawStrawsDBService
   ) {}
 
+  /** @desc 创建奖池 */
   async createDrawStrawsPool(drawStrawsPool: ICreateDrawStrawsDto) {
     const { title, total, type } = drawStrawsPool
     const uuid = await this.drawStrawsDBService.createDrawStrawsPool({ type, title, total })
@@ -32,21 +33,29 @@ export class DrawStrawsService {
 
     const { title, pool, uid } = drawStrawsPool
     const { tag, newPool, error } = drawStraws(pool, type, role)
-    if (error) return new HttpException(error, 402)
+    if (error !== undefined) return new HttpException(error, 402)
 
-    const asyncWorks: Promise<unknown>[] = []
-    asyncWorks.push(
+    const asyncWorks: Promise<unknown>[] = [
       uid == 1
         ? this.cacheManager.del(key)
         : this.cacheManager.set(key, { title, pool: newPool, uid: uid - 1 }, 0)
-    )
+    ]
+
+    asyncWorks.push()
 
     /** @TODO 更新数据库 */
     await Promise.allSettled(asyncWorks)
 
-    return { tag, title, name, role, uid }
+    return {
+      tag,
+      title,
+      name,
+      role: type == DrawStrawsType.CREATE_GROUP_WITH_ROLE ? role : undefined,
+      uid
+    }
   }
 
+  /** @desc 获取抽签结果列表 */
   async getDrawStrawsList(uuid: string) {
     return await this.drawStrawsDBService.findOneById(uuid)
   }
