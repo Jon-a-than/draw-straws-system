@@ -1,7 +1,25 @@
 import { IsSetup } from '@/decorators/validators/IsSetup'
-import { IsInt, IsNotEmpty, IsUUID, Length, Max, Min } from 'class-validator'
+import {
+  IsInt,
+  IsNotEmpty,
+  IsUUID,
+  Length,
+  Max,
+  Min,
+  ValidateIf,
+  ValidateNested
+} from 'class-validator'
 
-import type { ICreateDrawStrawsDto } from '@/interfaces/drawStraws.interface'
+import { DrawStrawsType, ICreateDrawStrawsDto, IPoolSetup } from '@/interfaces/drawStraws.interface'
+
+class PoolSetup implements IPoolSetup {
+  tag: string
+
+  @IsInt()
+  @Min(1)
+  @IsNotEmpty()
+  limit: number
+}
 
 export class CreateDrawStrawsPoolDto implements ICreateDrawStrawsDto {
   @IsNotEmpty()
@@ -20,8 +38,10 @@ export class CreateDrawStrawsPoolDto implements ICreateDrawStrawsDto {
   @Min(1)
   total: number
 
+  @ValidateNested({ each: true })
+  @ValidateIf(({ type }) => type !== DrawStrawsType.SORT)
   @IsSetup()
-  setup: []
+  setup: PoolSetup[]
 }
 
 export class DrawStrawsDto {
@@ -45,6 +65,6 @@ export class DrawStrawsDto {
 
 export class GetDrawStrawsListDto {
   @IsNotEmpty()
-  @IsUUID()
+  @IsUUID(4)
   uuid: string
 }
