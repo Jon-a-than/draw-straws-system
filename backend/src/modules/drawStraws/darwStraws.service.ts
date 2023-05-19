@@ -21,7 +21,7 @@ export class DrawStrawsService {
     const uuid = await this.drawStrawsDBService.createDrawStrawsPool({ type, title, total })
 
     const { key, value } = createPool({ ...drawStrawsPool, uuid })
-    console.log(key, value)
+
     this.cacheManager.set(key, value, 0)
     return { uuid: `${uuid}$${type}` }
   }
@@ -35,16 +35,15 @@ export class DrawStrawsService {
     const { tag, newPool, error } = drawStraws(pool, type, role)
     if (error !== undefined) return new HttpException(error, 402)
 
-    const asyncWorks: Promise<unknown>[] = [
+    await Promise.allSettled([
+      this.drawStrawsDBService.addDrawStrawsListItem(
+        { uid, name, tag: type == DrawStrawsType.CREATE_GROUP_WITH_ROLE ? `${tag}$${role}` : tag },
+        uuid
+      ),
       uid == 1
         ? this.cacheManager.del(key)
         : this.cacheManager.set(key, { title, pool: newPool, uid: uid - 1 }, 0)
-    ]
-
-    asyncWorks.push()
-
-    /** @TODO 更新数据库 */
-    await Promise.allSettled(asyncWorks)
+    ])
 
     return {
       tag,

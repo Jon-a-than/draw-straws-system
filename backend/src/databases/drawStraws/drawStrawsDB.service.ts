@@ -4,7 +4,11 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { DrawStrawsPool } from '../schemas/drawStraws.schema'
 
-import type { IDrawStrawsSchema, IUUID } from '@/interfaces/drawStraws.interface'
+import type {
+  IDrawStrawsListItem,
+  IDrawStrawsSchema,
+  IUUID
+} from '@/interfaces/drawStraws.interface'
 
 @Injectable()
 export class DrawStrawsDBService {
@@ -29,6 +33,12 @@ export class DrawStrawsDBService {
       .exec()) as IDrawStrawsSchema & { __v: number }
 
     return document ? filterDocument(document) : null
+  }
+
+  async addDrawStrawsListItem(listItem: IDrawStrawsListItem, uuid: string) {
+    const doc = await this.drawStrawsPoolModel.findOne({ _id: uuid })
+    doc.list.push(listItem)
+    await doc.save()
   }
 }
 
