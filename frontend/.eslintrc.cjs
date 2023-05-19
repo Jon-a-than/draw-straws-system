@@ -15,7 +15,6 @@ module.exports = {
       extends: ['plugin:cypress/recommended']
     }
   ],
-  parserOptions: {
-    ecmaVersion: 'latest'
-  }
+  parserOptions: { ecmaVersion: 'latest' },
+  rules: { 'vue/multi-word-component-names': 'off' }
 }
