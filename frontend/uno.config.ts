@@ -3,19 +3,17 @@ import {
   presetAttributify,
   presetIcons,
   presetUno,
-  transformerAttributifyJsx
+  transformerAttributifyJsx,
+  transformerDirectives
 } from 'unocss'
 
 export default defineConfig({
-  transformers: [transformerAttributifyJsx()],
+  transformers: [transformerAttributifyJsx(), transformerDirectives()],
   presets: [
     presetAttributify({ prefix: 'v:' }),
     presetIcons({
       cdn: 'https://cdn.jsdelivr.net/npm/',
-      extraProperties: {
-        display: 'inline-block',
-        'vertical-align': 'middle'
-      }
+      extraProperties: { display: 'inline-block', 'vertical-align': 'middle' }
     }),
     presetUno()
   ]

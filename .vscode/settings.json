@@ -6,4 +6,8 @@
   "unocss.root": [
     "./frontend"
   ],
+  "scss.validate": true,
+  "css.customData": [
+    "./.vscode/unocss.json"
+  ],
 }
