@@ -28,6 +28,7 @@ coverage
 .classpath
 .vscode/*
 !.vscode/tasks.json
+!.vscode/unocss.json
 !.vscode/launch.json
 !.vscode/settings.json
 !.vscode/extensions.json
