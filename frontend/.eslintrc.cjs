@@ -7,7 +7,8 @@ module.exports = {
     'plugin:vue/vue3-essential',
     'eslint:recommended',
     '@vue/eslint-config-typescript',
-    '@vue/eslint-config-prettier'
+    '@vue/eslint-config-prettier',
+    '@unocss'
   ],
   overrides: [
     {
@@ -17,6 +18,8 @@ module.exports = {
   ],
   parserOptions: { ecmaVersion: 'latest' },
   rules: {
+    '@unocss/order': 'warn',
+    '@unocss/order-attributify': 'warn',
     '@typescript-eslint/no-unused-vars': [
       'warn',
       { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
