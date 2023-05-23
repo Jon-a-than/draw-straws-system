@@ -17,14 +17,15 @@
   },
   "dependencies": {
     "@unocss/reset": "^0.51.13",
-    "alova": "^2.5.2",
+    "alova": "^2.5.4",
     "pinia": "^2.1.3",
+    "pinia-plugin-persistedstate": "^3.1.0",
     "unocss": "^0.51.13",
     "vue": "^3.3.4",
     "vue-router": "^4.2.1"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.2.0",
+    "@rushstack/eslint-patch": "^1.3.0",
     "@tsconfig/node18": "^2.0.1",
     "@types/jsdom": "^21.1.1",
     "@types/node": "^18.16.14",
@@ -38,7 +39,7 @@
     "cypress": "^12.12.0",
     "eslint": "^8.41.0",
     "eslint-plugin-cypress": "^2.13.3",
-    "eslint-plugin-vue": "^9.13.0",
+    "eslint-plugin-vue": "^9.14.0",
     "jsdom": "^22.0.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.8",
