@@ -4,6 +4,7 @@ import { createPool } from './functions/createPool'
 import { CACHE_MANAGER } from '@nestjs/cache-manager'
 import { HttpException, Inject, Injectable } from '@nestjs/common'
 import { DrawStrawsDBService } from '@/databases/drawStraws/drawStrawsDB.service'
+import { RedisLockService } from '../redisLock/redisLock.service'
 
 import type { IDrawStrawsRedisValue } from './interfaces/drawStrawsRedis.interface'
 import { DrawStrawsType, ICreateDrawStrawsDto } from '@/interfaces/drawStraws.interface'
@@ -12,7 +13,8 @@ import { DrawStrawsType, ICreateDrawStrawsDto } from '@/interfaces/drawStraws.in
 export class DrawStrawsService {
   constructor(
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
-    private readonly drawStrawsDBService: DrawStrawsDBService
+    private readonly drawStrawsDBService: DrawStrawsDBService,
+    private readonly redisLockService: RedisLockService
   ) {}
 
   /** @desc 创建奖池 */
@@ -28,8 +30,15 @@ export class DrawStrawsService {
 
   async drawStraws(uuid: string, type: DrawStrawsType, name: string, role?: string) {
     const key = `${uuid}$${type}`
+
+    const hasGetLock = await this.redisLockService.lock(uuid)
+    if (!hasGetLock) return new HttpException('系统繁忙', 402)
+
     const drawStrawsPool = await this.cacheManager.get<IDrawStrawsRedisValue>(key)
-    if (drawStrawsPool === undefined) return new HttpException('口令错误或奖池已关闭', 402)
+    if (drawStrawsPool === undefined) {
+      this.redisLockService.unlock(uuid)
+      return new HttpException('口令错误或奖池已关闭', 402)
+    }
 
     const { title, pool, uid } = drawStrawsPool
     const { tag, newPool, error } = drawStraws(pool, type, role)
@@ -41,9 +50,11 @@ export class DrawStrawsService {
         uuid
       ),
       uid == 1
-        ? this.cacheManager.del(key)
-        : this.cacheManager.set(key, { title, pool: newPool, uid: uid - 1 }, 0)
+        ? await this.cacheManager.del(key)
+        : await this.cacheManager.set(key, { title, pool: newPool, uid: uid - 1 }, 0)
     ])
+
+    this.redisLockService.unlock(uuid)
 
     return {
       tag,
