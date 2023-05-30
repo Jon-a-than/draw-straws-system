@@ -1,4 +1,4 @@
-import { IDrawStrawsSchema } from '@/interfaces/drawStraws.interface'
+import { IDrawStrawsSchema } from '../../src/interfaces/drawStraws.interface'
 
 export async function checkResult(UUID_POOL: string[], BASE_URL: string) {
   const requests = UUID_POOL.map(async (uuidWithType) => {
@@ -19,7 +19,7 @@ export async function checkResult(UUID_POOL: string[], BASE_URL: string) {
       return right
     }, 0) / requests.length
 
-  console.log('正确率：', rightRate * 100 + '%')
+  console.log('奖池正确率：', rightRate * 100 + '%')
 }
 
 function checkList(drawStrawsResult: Omit<IDrawStrawsSchema, '_id'>) {

@@ -11,7 +11,7 @@ async function cuncurrenceTest() {
 
   console.log(UUID_POOL)
 
-  await testDrawStraws(UUID_POOL, TOTAL, BASE_URL)
+  await testDrawStraws(UUID_POOL, TOTAL, BASE_URL, POOL)
 
   await checkResult(UUID_POOL, BASE_URL)
 }

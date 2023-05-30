@@ -5,8 +5,8 @@ import type { ICreateDrawStrawsDto } from '../../src/interfaces/drawStraws.inter
 export async function testCreatePool(POOL: number) {
   const UUID_POOL: string[] = []
   const works = Array.from({ length: POOL }).map(async () => {
-    const { uuid } = await createPool(POOL_CONFIG[4])
-    // const { uuid } = await createPool(POOL_CONFIG[~~(Math.random() * POOL_CONFIG.length)])
+    // const { uuid } = await createPool(POOL_CONFIG[0])
+    const { uuid } = await createPool(POOL_CONFIG[~~(Math.random() * POOL_CONFIG.length)])
     UUID_POOL.push(uuid)
   })
 
