@@ -42,16 +42,21 @@ export class DrawStrawsService {
 
     const { title, pool, uid } = drawStrawsPool
     const { tag, newPool, error } = drawStraws(pool, type, role)
-    if (error !== undefined) return new HttpException(error, 402)
+    if (error !== undefined) {
+      this.redisLockService.unlock(uuid)
+      return new HttpException(error, 402)
+    }
+
+    this.drawStrawsDBService.addDrawStrawsListItem(
+      { uid, name, tag: type == DrawStrawsType.CREATE_GROUP_WITH_ROLE ? `${tag}$${role}` : tag },
+      uuid
+    )
 
     await Promise.allSettled([
-      this.drawStrawsDBService.addDrawStrawsListItem(
-        { uid, name, tag: type == DrawStrawsType.CREATE_GROUP_WITH_ROLE ? `${tag}$${role}` : tag },
-        uuid
-      ),
-      uid == 1
-        ? await this.cacheManager.del(key)
-        : await this.cacheManager.set(key, { title, pool: newPool, uid: uid - 1 }, 0)
+      // await ,
+      await (uid == 1
+        ? this.cacheManager.del(key)
+        : this.cacheManager.set(key, { title, pool: newPool, uid: uid - 1 }, 0))
     ])
 
     this.redisLockService.unlock(uuid)

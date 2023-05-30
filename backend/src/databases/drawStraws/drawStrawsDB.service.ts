@@ -32,7 +32,7 @@ export class DrawStrawsDBService {
       .lean()
       .exec()) as IDrawStrawsSchema & { __v: number }
 
-    return document ? filterDocument(document) : null
+    return document ? filterDocument(document) : { error: '奖池不存在' }
   }
 
   async addDrawStrawsListItem(listItem: IDrawStrawsListItem, uuid: string) {
