@@ -14,6 +14,7 @@
     "test": "turbo test:unit",
     "fe": "pnpm --filter frontend",
     "bk": "pnpm --filter backend",
+    "ph": "pnpm --filter mobile",
     "test:bk": "tsc .\\backend\\test\\concurrenceTest\\index.ts --outDir dist && node .\\dist\\test\\concurrenceTest\\index.js"
   },
   "lint-staged": {
@@ -29,7 +30,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "prettier": "^2.8.8",
-    "turbo": "^1.9.9",
+    "turbo": "^1.10.1",
     "typescript": "^5.0.4"
   }
 }
