@@ -4,7 +4,8 @@
   "unocss.colorPreview": true,
   "unocss.underline": true,
   "unocss.root": [
-    "./frontend"
+    "./frontend",
+    "./mobile"
   ],
   "scss.validate": true,
   "css.customData": [
