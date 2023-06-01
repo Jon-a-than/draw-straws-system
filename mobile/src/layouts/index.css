@@ -1,0 +1,8 @@
+#app {
+  @apply h-100vh h-100dvh;
+  @apply flex flex-col justify-between;
+}
+
+#app > main {
+  @apply flex-1;
+}
