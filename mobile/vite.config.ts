@@ -7,6 +7,13 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  css: {
+    modules: {
+      scopeBehaviour: 'local',
+      localsConvention: 'camelCaseOnly',
+      generateScopedName: '[name]_[local]_[hash:5]'
+    }
+  },
   plugins: [vue(), vueJsx(), unocss()],
   resolve: {
     alias: {
