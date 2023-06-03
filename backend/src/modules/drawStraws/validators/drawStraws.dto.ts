@@ -59,6 +59,7 @@ export class DrawStrawsDto {
   @Length(1, 30)
   name: string
 
+  @ValidateIf(({ type }) => type == DrawStrawsType.CREATE_GROUP_WITH_ROLE)
   @Length(1, 50)
   role: string
 }

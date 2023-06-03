@@ -53,7 +53,6 @@ export class DrawStrawsService {
     )
 
     await Promise.allSettled([
-      // await ,
       await (uid == 1
         ? this.cacheManager.del(key)
         : this.cacheManager.set(key, { title, pool: newPool, uid: uid - 1 }, 0))
