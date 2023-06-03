@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DrawStraws from '@/pages/DrawStraws/Form'
+import { DRAW_STRAWS_ROUTE } from './modules/drawStraws'
+import { CREATE_POOL_ROUTE } from './modules/createPool'
+import { SEARCH_RESULT_ROUTE } from './modules/searchResult'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,21 +10,9 @@ const router = createRouter({
       path: '/',
       redirect: '/draw-straws'
     },
-    {
-      path: '/draw-straws',
-      name: 'DrawStraws',
-      component: DrawStraws
-    },
-    {
-      path: '/create',
-      name: 'Create',
-      component: () => import('@/pages/Create')
-    },
-    {
-      path: '/list',
-      name: 'List',
-      component: () => import('@/pages/List')
-    }
+    DRAW_STRAWS_ROUTE,
+    CREATE_POOL_ROUTE,
+    SEARCH_RESULT_ROUTE
   ]
 })
 

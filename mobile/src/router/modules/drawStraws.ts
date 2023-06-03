@@ -1,13 +1,13 @@
 import type { RouteRecordRaw } from 'vue-router'
 
 export const DRAW_STRAWS_ROUTE: Readonly<RouteRecordRaw> = {
-  path: '/drawStraws',
+  path: '/draw-straws',
+  meta: { defaultPath: '/draw-straws', title: '开始抽签', showBack: false },
   children: [
     {
       path: '',
       name: 'DrawStrawsForm',
-      component: () => import('@/pages/DrawStraws/Form'),
-      meta: { title: '开始抽签', showBack: false }
+      component: () => import('@/pages/DrawStraws/Form')
     },
     {
       path: 'result',
