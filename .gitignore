@@ -40,3 +40,5 @@ coverage
 *.sw?
 *.launch
 *.sublime-workspace
+
+mongo

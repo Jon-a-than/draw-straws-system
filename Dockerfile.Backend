@@ -1,0 +1,22 @@
+FROM node:slim as nest-build
+WORKDIR /app
+RUN npm config set registry https://registry.npmmirror.com
+RUN npm i pnpm -g
+RUN pnpm config set registry https://registry.npmmirror.com
+COPY ./backend/package.json /app
+RUN pnpm i
+COPY ./backend /app
+RUN pnpm build
+
+
+FROM node:slim as nest-prod
+WORKDIR /app
+RUN npm config set registry https://registry.npmmirror.com
+RUN npm i pnpm -g
+RUN pnpm config set registry https://registry.npmmirror.com
+COPY --from=nest-build /app/package.json /app
+COPY --from=nest-build /app/pnpm-lock.yaml /app
+RUN pnpm i --prod
+COPY --from=nest-build /app/dist /app/dist
+CMD pnpm start:prod
+EXPOSE 4936

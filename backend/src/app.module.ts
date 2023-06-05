@@ -7,10 +7,12 @@ import { DrawStrawModule } from './modules/drawStraws/drawStraws.module'
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://127.0.0.1:27017', { dbName: 'drawStrawsPool' }),
+    MongooseModule.forRoot(`mongodb://${process.env.MONGO_HOST ?? '127.0.0.1'}:27017`, {
+      dbName: 'drawStrawsPool'
+    }),
     CacheModule.register({
       store: ioRedisStore,
-      host: 'localhost',
+      host: process.env.REDIS_HOST ?? '127.0.0.1',
       port: 6379,
       isGlobal: true
     }),
