@@ -23,6 +23,16 @@
 
 ### 快速开始
 
+#### 使用Docker
+
+```bash
+docker compose -p draw-straws-system-backend up
+```
+
+
+#### 本地开发
+**预先启动redis, mongodb**
+
 ```bash
 pnpm bk start
 ```
