@@ -5,17 +5,17 @@ import { RouterView } from 'vue-router'
 
 import Footer from './Footer'
 import Header from './Header'
+import { Message } from 'tdesign-mobile-vue'
 
-export default defineComponent({
-  setup() {
-    return () => (
-      <>
-        <Header />
-        <main>
-          <RouterView />
-        </main>
-        <Footer />
-      </>
-    )
-  }
+export default defineComponent(() => {
+  return () => (
+    <>
+      <Header />
+      <main>
+        <Message class="global-message" />
+        <RouterView />
+      </main>
+      <Footer />
+    </>
+  )
 })

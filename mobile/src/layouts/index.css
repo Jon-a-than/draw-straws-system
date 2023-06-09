@@ -1,8 +1,18 @@
+* {
+  user-select: none;
+  --td-button-primary-bg-color: #93b3ff;
+  --td-button-primary-border-color: #d4e4ff;
+}
+
+input {
+  @apply focus:outline-none;
+}
+
 #app {
   @apply h-100vh h-100dvh;
   @apply flex flex-col justify-between;
 }
 
 #app > main {
-  @apply flex-1;
+  @apply flex-1 bg-#f6f6f6;
 }
