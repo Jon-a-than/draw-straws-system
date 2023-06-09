@@ -12,7 +12,6 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "test": "turbo test:unit",
-    "fe": "pnpm --filter frontend",
     "bk": "pnpm --filter backend",
     "ph": "pnpm --filter mobile",
     "test:bk": "tsc .\\backend\\test\\concurrenceTest\\index.ts --outDir dist && node .\\dist\\test\\concurrenceTest\\index.js"
@@ -32,6 +31,6 @@
     "prettier": "^2.8.8",
     "turbo": "^1.10.2",
     "typescript": "^5.1.3",
-    "unocss": "^0.52.7"
+    "unocss": "^0.53.1"
   }
 }
