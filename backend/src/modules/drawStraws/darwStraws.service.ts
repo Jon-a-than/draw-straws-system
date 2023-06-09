@@ -28,6 +28,7 @@ export class DrawStrawsService {
     return { uuid: `${uuid}$${type}` }
   }
 
+  /** @desc 抽奖 */
   async drawStraws(uuid: string, type: DrawStrawsType, name: string, role?: string) {
     const key = `${uuid}$${type}`
 
