@@ -22,6 +22,12 @@ export const CREATE_DRAW_STRAWS_ROUTE: Readonly<RouteRecordRaw> = {
             if (to.query && to.query.total) next()
             else next({ name: 'CreatePool' })
           }
+        },
+        {
+          path: 'result',
+          name: 'CreatePoolResult',
+          component: () => import('@/pages/CreatePool/views/CreateResult'),
+          meta: { title: '创建结果', showBack: true }
         }
       ]
     }

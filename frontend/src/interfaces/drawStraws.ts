@@ -16,5 +16,14 @@ interface CreateDrawStrawsPayload {
   }>
 }
 
+interface DrawStrawsBasePayload {
+  uuid: string
+  name: string
+}
+
+type DrawStrawsPayload =
+  | (DrawStrawsBasePayload & { type: 0 | 1 | 2 | 4 })
+  | (DrawStrawsBasePayload & { type: 3; role: string })
+
 export { DrawStrawsType }
-export type { CreateDrawStrawsPayload }
+export type { CreateDrawStrawsPayload, DrawStrawsPayload }

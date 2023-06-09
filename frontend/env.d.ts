@@ -7,6 +7,7 @@ declare module 'vue' {
   interface InputHTMLAttributes<_T> extends AttributifyAttributes {}
   interface ButtonHTMLAttributes<_T> extends AttributifyAttributes {}
   interface ComponentCustomProps<_T> extends AttributifyAttributes {}
+  interface SelectHTMLAttributes<_T> extends AttributifyAttributes {}
 }
 
 declare module '*.vue' {

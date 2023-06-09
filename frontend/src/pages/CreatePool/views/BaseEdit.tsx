@@ -2,6 +2,7 @@ import { defineComponent, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 
 import Button from '@/components/base/Button'
+import Form from '@/components/base/Form'
 import Input from '@/components/base/Input'
 
 import type { CreateDrawStrawsPayload } from '@/interfaces/drawStraws'
@@ -17,21 +18,19 @@ export default defineComponent({
     }
 
     return () => (
-      <>
-        <form flex="~ col items-stretch gap-4" text-center>
-          <Input v-model={formDate.title} h-10 px-2 placeholder="请输入奖池标题">
-            {{ prefix: () => <i text-lg mx-2 i-bx-ball /> }}
-          </Input>
-          <Input v-model={formDate.total} type="number" h-10 px-2 placeholder="请输入奖池签数">
-            {{ prefix: () => <i text-lg mx-2 i-octicon-beaker-16 /> }}
-          </Input>
+      <Form>
+        <Input v-model={formDate.title} h-10 px-2 placeholder="请输入奖池标题">
+          {{ prefix: () => <i text-lg mx-2 i-bx-ball /> }}
+        </Input>
+        <Input v-model={formDate.total} type="number" h-10 px-2 placeholder="请输入奖池签数">
+          {{ prefix: () => <i text-lg mx-2 i-octicon-beaker-16 /> }}
+        </Input>
 
-          <Button onClick={handleSubmit} mt-4 mx-auto h-10 w-50 type="button">
-            <i text="lg black" mr-2 i-ic-outline-add-box />
-            创建
-          </Button>
-        </form>
-      </>
+        <Button onClick={handleSubmit} mt-4 mx-auto h-10 w-50 type="button">
+          <i text="lg black" mr-2 i-ic-outline-add-box />
+          创建
+        </Button>
+      </Form>
     )
   }
 })

@@ -9,7 +9,7 @@ export default defineComponent({
     const handleBack = () => router.back()
 
     return () => (
-      <header bg="[#c04851]" h-12 grid="~ cols-3 justify-center items-stretch">
+      <header bg="#c04851" h-12 grid="~ cols-3 justify-center items-stretch">
         <button
           onClick={handleBack}
           v-show={route.meta.showBack}
@@ -22,9 +22,7 @@ export default defineComponent({
         <span font-bold grid="col-start-2 self-center" text="xl amber center">
           {route.meta.title}
         </span>
-        <button bg-transparent border-none text="end 3xl amber">
-          <i i-bx-moon />
-        </button>
+        <button bg-transparent border-none text="end 3xl amber"></button>
       </header>
     )
   }
