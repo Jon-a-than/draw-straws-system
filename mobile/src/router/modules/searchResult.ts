@@ -12,7 +12,12 @@ export const SEARCH_RESULT_ROUTE: Readonly<RouteRecordRaw> = {
     {
       path: 'result',
       name: 'PoolResult',
-      component: () => import('@/pages/Search/Result')
+      component: () => import('@/pages/Search/Result'),
+      meta: { title: '奖池信息', showBack: true },
+      beforeEnter({ query }, _, next) {
+        if (!query.uuid || !query.type) next('/404')
+        else next()
+      }
     }
   ]
 }

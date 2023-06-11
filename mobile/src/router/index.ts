@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { DRAW_STRAWS_ROUTE } from './modules/drawStraws'
 import { CREATE_POOL_ROUTE } from './modules/createPool'
+import { DRAW_STRAWS_ROUTE } from './modules/drawStraws'
 import { SEARCH_RESULT_ROUTE } from './modules/searchResult'
 
 const router = createRouter({

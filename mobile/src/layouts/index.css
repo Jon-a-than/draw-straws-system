@@ -2,6 +2,8 @@
   user-select: none;
   --td-button-primary-bg-color: #93b3ff;
   --td-button-primary-border-color: #d4e4ff;
+
+  --td-switch-checked-color: #93b3ff;
 }
 
 input {
@@ -14,5 +16,11 @@ input {
 }
 
 #app > main {
+  @apply overflow-y-hidden;
   @apply flex-1 bg-#f6f6f6;
+  @apply flex flex-col;
+}
+
+.t-pull-down-refresh__track {
+  flex-grow: 1;
 }
