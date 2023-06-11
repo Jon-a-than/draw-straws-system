@@ -1,23 +1,20 @@
-import { defineComponent, ref, watch } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 
-import { useRoute, useRouter } from 'vue-router'
+import { NOTICE } from '@/constants/provieKey'
 import { TabBar, TabBarItem } from 'tdesign-mobile-vue'
+import { useRoute, useRouter } from 'vue-router'
 
 export default defineComponent(() => {
   const route = useRoute()
   const router = useRouter()
 
-  const routePath = ref('')
-
+  const { setVisible } = inject(NOTICE)!
   async function handleNavigate(to: string | number) {
+    setVisible(false)
     await router.push(to as string)
   }
 
-  watch(
-    () => route.meta.defaultPath,
-    () => (routePath.value = route.meta.defaultPath as string),
-    { immediate: true }
-  )
+  const routePath = computed(() => route.meta.defaultPath as string)
 
   const navLinks = [
     {
