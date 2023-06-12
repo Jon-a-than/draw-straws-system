@@ -7,7 +7,7 @@ export const CREATE_POOL_ROUTE: Readonly<RouteRecordRaw> = {
     {
       path: '',
       name: 'CreatePool',
-      component: () => import('@/pages/Create/Form')
+      component: () => import('@/pages/Forms/CreatPool')
     }
   ]
 }

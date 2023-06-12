@@ -12,7 +12,11 @@ const router = createRouter({
     },
     DRAW_STRAWS_ROUTE,
     CREATE_POOL_ROUTE,
-    SEARCH_RESULT_ROUTE
+    SEARCH_RESULT_ROUTE,
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/draw-straws'
+    }
   ]
 })
 

@@ -7,17 +7,7 @@ export const DRAW_STRAWS_ROUTE: Readonly<RouteRecordRaw> = {
     {
       path: '',
       name: 'DrawStrawsForm',
-      component: () => import('@/pages/DrawStraws/Form')
-    },
-    {
-      path: 'result',
-      name: 'DrawStrawsResult',
-      component: () => import('@/pages/DrawStraws/Result'),
-      meta: { title: '抽签结果', showBack: true },
-      beforeEnter({ query }, _, next) {
-        if (!query.uuid || !query.uid) next('/404')
-        else next()
-      }
+      component: () => import('@/pages/Forms/DrawStraws')
     }
   ]
 }
