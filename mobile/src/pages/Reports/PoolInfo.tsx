@@ -1,4 +1,6 @@
 import { NOTICE } from '@/constants/provieKey'
+import { useCopy } from '@/hooks/useCopy'
+import type { PoolListResult } from '@/interfaces/api'
 import { getPoolList } from '@/services/drawStraws'
 import { useRequest } from 'alova'
 import { computed, defineComponent, inject, ref } from 'vue'
@@ -25,12 +27,43 @@ export default defineComponent(() => {
   const uuidWithType = computed(() => `${route.query.uuid}$${route.query.type}`)
 
   const { setMessage } = inject(NOTICE)!
-  const COPY = ref<HTMLInputElement>()
+  const { COPY, copy, copyText } = useCopy()
   function handleCopy() {
-    COPY.value?.select()
-    document.execCommand('copy')
-    setMessage('复制成功')
+    copy(uuidWithType.value, () => setMessage('复制成功'))
   }
+
+  const tableInfo = computed(() => {
+    const tagTitle: Record<string, string> = {
+      0: '签名',
+      1: '签名',
+      2: '小组ID',
+      3: '小组ID',
+      4: '次序'
+    }
+
+    const columns = [
+      defineHeader('uid', 'UID'),
+      defineHeader('name', '昵称'),
+      defineHeader('tag', tagTitle[route.query.type as string])
+    ]
+    const list = (data.value as PoolListResult)?.list ?? []
+    if (route.query.type === '3') {
+      columns.push(defineHeader('role', '角色'))
+      return {
+        columns,
+        data: list.map((item) => ({
+          ...item,
+          role: item.tag.split('$').slice(1).join('$'),
+          tag: item.tag.split('$')[0]
+        }))
+      }
+    }
+
+    return {
+      columns,
+      data: list
+    }
+  })
 
   return () => (
     <t-pull-down-refresh
@@ -41,38 +74,34 @@ export default defineComponent(() => {
       class="flex flex-grow pt-4"
     >
       <div flex="~ col items-center gap-4">
-        <h2 class="pl-4 text-center text-2xl font-bold">{data.value?.title}</h2>
         <t-progress
           class="grow"
           theme="circle"
           strokeWidth="15"
           color="#93b3ff"
-          percentage={percentage.value}
+          percentage={~~percentage.value}
         />
         <p>
           <span class="font-bold">总签数: {data.value?.total}</span>
           <span class="ml-4 font-bold">已抽人数: {data.value?.list?.length}</span>
         </p>
-        <p flex="~ items-center">
-          <span>
-            口令: <strong>{`${route.query.uuid}$${route.query.type}`}</strong>
-          </span>
+        <t-cell title={data.value?.title} description={uuidWithType.value}>
+          <input class="absolute -top-100" ref={COPY} v-model={copyText.value} type="text" />
           <t-button theme="primary" size="extra-small" type="button" onClick={handleCopy}>
-            复制
+            复制口令
           </t-button>
-          <input ref={COPY} v-model={uuidWithType.value} class="absolute -top-100" type="text" />
-        </p>
+        </t-cell>
         <t-table
-          columns={[
-            { colKey: 'name', title: '昵称', ellipsis: true },
-            { colKey: 'tag', title: '标签', ellipsis: true },
-            { colKey: 'role', title: '角色', ellipsis: true }
-          ]}
+          columns={tableInfo.value.columns}
           rowKey="uid"
           cellEmptyContent="-"
-          data={data.value?.list ?? []}
+          data={tableInfo.value.data}
         />
       </div>
     </t-pull-down-refresh>
   )
 })
+
+function defineHeader(key: string, title: string) {
+  return { colKey: key, title, ellipsis: true }
+}

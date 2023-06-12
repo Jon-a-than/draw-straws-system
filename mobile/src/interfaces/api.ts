@@ -38,7 +38,11 @@ interface PoolListResult {
   title: string
   type: number
   total: number
-  list: {}[]
+  list: {
+    uid: number
+    name: string
+    tag: string
+  }[]
 }
 
 export type {
