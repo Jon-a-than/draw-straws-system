@@ -11,6 +11,7 @@ interface DrawStrawsResult {
   name: string
   tag: string
   role?: string
+  message?: string
 }
 
 interface CreatePoolPayload {
@@ -25,6 +26,7 @@ interface CreatePoolPayload {
 
 interface CreatePoolResult {
   uuid: `${string}$${number}`
+  message?: string
 }
 
 interface GetPoolListPayload {

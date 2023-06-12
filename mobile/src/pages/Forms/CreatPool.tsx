@@ -54,8 +54,8 @@ export default defineComponent(() => {
     }
 
     await send(payload)
-    if (error.value) {
-      return setMessage(error.value.message, 'error')
+    if (error.value || data.value?.message) {
+      return setMessage((error.value?.message ?? '') + data.value?.message, 'error')
     }
 
     setMessage('创建成功')
@@ -94,7 +94,10 @@ export default defineComponent(() => {
           >
             <t-stepper min={1} max={200} size="large" v-model={formData.setup[0].limit} />
           </t-form-item>
-          <t-collapse v-show={['0', '1', '3'].includes(formData.type[0])} p="l-2 r-4">
+          <t-collapse
+            v-show={formData.type[0] == '0' || (formData.type[0] == '2' && formData.switch)}
+            p="l-2 r-4"
+          >
             {formData.setup.map((_, index) => (
               <t-collapse-panel
                 value={index}
