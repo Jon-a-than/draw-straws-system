@@ -1,11 +1,11 @@
-import 'virtual:uno.css'
 import '@unocss/reset/tailwind.css'
+import 'virtual:uno.css'
 
-import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { createApp } from 'vue'
 
-import TDesign from 'tdesign-mobile-vue'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import TDesign from 'tdesign-mobile-vue'
 
 import App from '@/layouts'
 import router from '@/router'
