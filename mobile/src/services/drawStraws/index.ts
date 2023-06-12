@@ -18,5 +18,8 @@ export function drawStraws(payload: DrawStrawsPayload) {
 }
 
 export function getPoolList(payload: GetPoolListPayload) {
-  return alovaInstance.Get<PoolListResult>('/pool', { params: payload })
+  return alovaInstance.Get<PoolListResult>('/pool', {
+    params: payload,
+    localCache: { expire: 5000 }
+  })
 }
